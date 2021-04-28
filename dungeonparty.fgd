@@ -108,7 +108,7 @@
 	input toggle(void)  : "Toggle the node."
 ]
 
-@PointClass base(Targetname) = logic_waves : "DP: Watches for when a specific wave starts."
+@PointClass base(Targetname) = logic_waves_dp : "DP: Watches for when a specific wave starts."
 [
 	// Keys
 	wave(integer) : "Wave" : 1 : "Any On* outputs will watch for this wave. Use -1 for all waves."
@@ -128,7 +128,7 @@
 	output OnCountReached(void)    : "Called when the specified count has been reached."
 ]
 
-@PointClass base(Targetname) = info_shopman	: "DP: Where the shop kleiner will spawn during intermission. Has a width of 48 and height of 72." 
+@PointClass base(Targetname, Angles) = info_shopman	: "DP: Where the shop kleiner will spawn during intermission. Has a width of 48 and height of 72." 
 [
 	// keys
 	showkleiner(choices) : "Show Kleiner" : 1 : "Whether to show the kleiner in the center or not." =
