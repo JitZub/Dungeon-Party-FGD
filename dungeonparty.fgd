@@ -1,0 +1,142 @@
+//////////////////////////////////////////////////////////////////////////////////
+// Dungeon Party FGD                                                            //
+//////////////////////////////////////////////////////////////////////////////////
+//todo: actually complete the FGD
+@include "base.fgd"
+@include "halflife2.fgd"
+@include "hl2mp.fgd"
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// Gamemode - Brush Entities /////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+
+@SolidClass base(Targetname) = logic_monsterspawner : "DP: A brush that a monster can spawn inside in."
+[
+    // keys
+    enabled(choices) : "Enabled" : 1 : "Enable the brush entity." =
+    [
+        1 : "Yes"
+        0 : "No"
+    ]
+    // Inputs
+    input enable(void) : "Enable the entity."
+    input disable(void) : "Disable the entity."
+    input seton(integer) : "Enable or Disable the entity."
+
+]
+@SolidClass base(Targetname) = trigger_hurt_dp : "DP: A trigger_hurt that uses Dungeon Party's damage system. Always use this over trigger_hurt."
+[
+	// Keys
+	starton(choices)             : "Start On" : 1 : "Start on." =
+	[
+		1 : "Yes"
+		0 : "No"
+	]
+	
+	damage(integer)              : "Damage" : 5 : "Integer by which the person is damaged."
+	damagetype(choices)          : "Damage Type" : "generic" : "Damage Type" =
+	[
+		"generic"          : "Generic"
+		"physical"         : "Physical"
+		"magical"             : "Magical"
+		"pure"              : "Pure"
+	]
+
+	
+	// Inputs
+	input seton(integer) : "0 for off, 1 for on."
+	input enable(void)   : "Same as seton 1."
+	input disable(void)  : "Same as seton 0."
+	
+]
+
+@SolidClass base(Targetname) = trigger_kill_dp : "DP: A brush that truly kills players/entities. Use this for things like death pits."
+[
+	// Keys
+	starton(choices)             : "Start On" : 1 : "Start on." =
+	[
+		1 : "Yes"
+		0 : "No"
+	]
+
+	// Inputs
+	input seton(integer) : "0 for off, 1 for on."
+	input enable(void)   : "Same as seton 1."
+	input disable(void)  : "Same as seton 0."
+]
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// Gamemode - Point Entities /////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+
+
+
+@BaseClass base(Targetname) = DPSpawn
+[
+	// Keys
+	disabled(choices)   : "Disabled" : 0 : "If disabled, players cannot spawn here." =
+	[
+		1 : "Yes"
+		0 : "No"
+	]
+
+	// Inputs
+	input enable(void)  : "Enable the spawn point."
+	input disable(void) : "Disable the spawn point."
+	input toggle(void)  : "Toggle the spawn point."
+]
+
+@PointClass base(PlayerClass, Angles, DPSpawn) studio("models/editor/playerstart.mdl") = info_player_dp       : "DP: Humans can spawn here." []
+
+
+@PointClass base(Targetname, Angles) studio("models/props_wasteland/medbridge_post01.mdl") = info_objectivenode : "DP: Manual Placement of Objectives."
+[
+	// Keys
+	starton(choices) : "Start On" : 1 : "Start On" =
+	[
+		1 : "Yes"
+		0 : "No"
+	]	
+
+	// Inputs
+	input enable(void)  : "Enable the node."
+	input disable(void) : "Disable the node."
+	input toggle(void)  : "Toggle the node."
+]
+
+@PointClass base(Targetname) = logic_waves : "DP: Watches for when a specific wave starts."
+[
+	// Keys
+	wave(integer) : "Wave" : 1 : "Any On* outputs will watch for this wave. Use -1 for all waves."
+
+	// Outputs
+	output OnWaveStart(void)    : "Called when the specified wave has started, and intermission has ended."
+	output OnWaveEnd(void)      : "Called when the specified wave has ended, and intermission has started."
+]
+
+@PointClass base(Targetname) = logic_objectivecount: "DP: Watches for when a specific amount of objectives within a wave is completed."
+[
+	// Keys
+	wave(integer) : "Wave" : 1 : "Any On* outputs will watch for the count during this specific wave. Use -1 for all waves."
+	level(integer) : "Level" : 1 : "Any On* outputs will watch for this count. Use -1 for all levels."
+
+	// Outputs
+	output OnCountReached(void)    : "Called when the specified count has been reached."
+]
+
+@PointClass base(Targetname) = info_shopman	: "DP: Where the shop kleiner will spawn during intermission. Has a width of 48 and height of 72." 
+[
+	// keys
+	showkleiner(choices) : "Show Kleiner" : 1 : "Whether to show the kleiner in the center or not." =
+	[
+		1 : "Yes"
+		0 : "No"
+	]
+	// inputs
+	input openshopmenu(caller,activator) : "Use this if you want to tie this with func_brushes."
+]
+
