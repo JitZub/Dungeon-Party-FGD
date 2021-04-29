@@ -122,7 +122,7 @@
 [
 	// Keys
 	wave(integer) : "Wave" : 1 : "Any On* outputs will watch for the count during this specific wave. Use -1 for all waves."
-	level(integer) : "Level" : 1 : "Any On* outputs will watch for this count. Use -1 for all levels."
+	count(integer) : "count" : 1 : "Any On* outputs will watch for this count of objectives completed. Use -1 for all counts."
 
 	// Outputs
 	output OnCountReached(void)    : "Called when the specified count has been reached."
