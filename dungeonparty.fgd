@@ -137,6 +137,6 @@
 		0 : "No"
 	]
 	// inputs
-	input openshopmenu(caller,activator) : "Use this if you want to tie this with func_brushes."
+	// input openshopmenu(caller,activator) : "Use this if you want to tie this with func_brushes."
 ]
 
