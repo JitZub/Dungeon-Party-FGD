@@ -11,6 +11,9 @@
 // Gamemode - Brush Entities /////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 
+
+
+
 @SolidClass base(Targetname, Parentname) = logic_monsterspawner : "DP: A brush that a monster can spawn inside in."
 [
     // keys
@@ -42,7 +45,7 @@
 		"magical"             : "Magical"
 		"pure"              : "Pure"
 	]
-	damagerecycle(float)		 :"Damage Recycle" : .5 : "Float value that determines how often a person can be damaged. This is per-player, not per-trigger." 
+	damagerecycle(float)		 :"Damage Recycle" : "0.5" : "Float value that determines how often a person can be damaged. This is per-player, not per-trigger." 
 
 	
 	// Inputs
@@ -119,6 +122,35 @@
 	output OnWaveEnd(void)      : "Called when the specified wave has ended, and intermission has started."
 ]
 
+
+@PointClass base(Targetname) = info_gamerules_dp : "DP: Shows the info of the map, and dictates which rules are appropriate for said map."
+[
+	// Keys
+	enemysize(choices) : "Enemy Size" : 0 : "Max size that an enemy can spawn. 0 = Small (zombies, nightmare) 1 = Medium (Displacer Lich, Paingunners) 2 = Large (Pukepus, Antlion Golem, Sun Warden) " =
+	[
+		0 : "Small"
+		1 : "Medium"
+		2 : "Large"
+	]	
+	mapsize(choices) : "Map Size" : 1 : "Size of the whole map. 0 = House Map/Suffer. 1 = gm_wherestruct. 2 = dp_nevada" =
+	[
+		0 : "Small"
+		1 : "Medium"
+		2 : "Large"
+	]	
+	
+	maplength(choices) : "Map Length" : 1 : "Length of the whole map. 0 = House Map/Suffer. 1 = Mall Map. 2 = dp_nevada, gm_wherestruct. 3 = dp_canyon_a2" =
+	[
+		0 : "Short"
+		1 : "Medium"
+		2 : "Long"
+		3 : "Very Long"
+	]	
+
+
+	
+]
+
 @PointClass base(Targetname) = logic_objectivecount: "DP: Watches for when a specific amount of objectives within a wave is completed."
 [
 	// Keys
@@ -129,7 +161,7 @@
 	output OnCountReached(void)    : "Called when the specified count has been reached."
 ]
 
-@PointClass base(Targetname, Angles) = info_shopman	: "DP: Where the shop kleiner will spawn during intermission. Has a width of 48 and height of 72." 
+@PointClass base(Targetname, Angles) studio("models/kleiner.mdl") = info_shopman	: "DP: Where the shop kleiner will spawn during intermission. Has a width of 48 and height of 72." 
 [
 	// keys
 	showkleiner(choices) : "Show Kleiner" : 1 : "Whether to show the kleiner in the center or not." =
